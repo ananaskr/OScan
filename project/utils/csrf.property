@@ -1,0 +1,8 @@
+[url]
+csrf_name=state,token
+
+[headers]
+csrf_name=X-CSRF-TOKEN,X-CSRFToken,
+
+[body]
+csrf_name=csrf,csrftoken,xsrftoken,token
