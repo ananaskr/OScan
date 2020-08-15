@@ -1,21 +1,37 @@
-### Description
-This is a tool for checking the vulnerabilities of the OAuth2.0 on the web.
+## Description
+This is a tool for scanning the vulnerabilities of the OAuth2.0 implementations on the web.
 
-### Usage
+## Done
 
-1.start the server of mongodb 
+- [x] CSRF.
+- [x] Scope Privilege Escalation.
+- [x] Covert Redirection.
+- [x] Open Redirection.
+- [x] Same Original Redirection with Referer.
+- [x] Authorization Code Middle Attack.
+- [x] Access Token Middle Attack.
+
+## Todo
+- [] Same Original Redirection with XSS.
+
+## Install
+
+[1] Start the server of mongodb 
 
 ```
 mongod --dbpath /yourpath
 ```
 
-2.install the requirements
+[2] Install the requirements
 
 ```
 pip3 install -r requirements.txt
 ```
 
-3.exec the command
+
+## Usage
+
+3. exec the command
 
 ```
 python3 oscan.py -req1 requests1 -req2 requests2
