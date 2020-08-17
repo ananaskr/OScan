@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/ananaskr/OScan">
-    <img src="./img/2.png"
+    <img src="https://github.com/ananaskr/OScan/blob/master/img/2.png"
     alt="OScan logo">
   </a>
 </p>
@@ -56,7 +56,7 @@ Use `-h` options to see all the usage.
 
 
 The API to be detected is best given in the following JSON format. If you think it is complex, you can also provide only one url with `-u` options instead. It will consume more time and get a false negative result. 
-![](./img/1.png)
+![](https://github.com/ananaskr/OScan/blob/master/img/1.png)
 exec the command
 
 ```
@@ -65,5 +65,5 @@ python oscan.py -u http://api.xxx.com/xxx
 ```
 
 ## Example
-![](./img/3.png)
+![](https://github.com/ananaskr/OScan/blob/master/img/3.png)
 
