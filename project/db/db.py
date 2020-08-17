@@ -10,10 +10,11 @@ class Database:
 		self.client = MongoClient(mongo_host,mongo_port)
 		self.db = self.client.oscan
 
-	def fetch_records(self,param):
-		param = json.loads(param)[0]
+	def fetch_records(self,col,param):
+		param = json.loads(param)
 		print(param)
-		records = self.db.result.find(param)
+		print(param)
+		records = self.db.col.find(param)
 		if records:
 			for data in records:
 				data.pop('_id')

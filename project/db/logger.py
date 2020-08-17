@@ -1,9 +1,13 @@
+import logging
+from logging import handlers
+
 class logger(object):
+
 	def __init__(self):
-		self.G = '\033[92m'
-		self.Y = '\033[93m'
-		self.B = '\033[94m'
-		self.R = '\033[91m'
+		self.G = '\033[0;32;40m'
+		self.Y = '\033[0;33;40m'
+		self.B = '\033[0;34;40m'
+		self.R = '\033[0;31;40m'
 		self.W = '\033[0m' 
 
 

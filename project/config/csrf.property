@@ -1,4 +1,4 @@
-[url]
+[query]
 csrf_name=state,token
 
 [headers]
