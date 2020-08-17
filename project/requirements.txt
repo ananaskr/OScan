@@ -1,3 +1,15 @@
+aiohttp==3.0.9
+aniso8601==8.0.0
+asn1crypto==0.24.0
+async-timeout==2.0.1
+beautifulsoup4==4.6.3
+bitarray==1.5.1
+BitVector==3.4.8
+BloomFilter==0.1.0
+bs4==0.0.1
+ConcurrentLogHandler==0.9.1
+pybloom-live==3.0.0
 pymongo==3.9.0
-requests==2.19.1
-urllib3==1.23
+requests==2.20.0
+tldextract==2.2.3
+urllib3==1.24.2
