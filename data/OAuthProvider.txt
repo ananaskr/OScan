@@ -1,0 +1,56 @@
+[service,link]
+500px,api.500px.com/v1/oauth/request_token
+Amazon,www.amazon.com/ap/oa
+AOL,api.login.aol.com/oauth2/request_auth
+Autodesk,developer.api.autodesk.com/authentication/v1/authorize
+Basecamp,launchpad.37signals.com/authorization/new
+Battle.net,battle.net/oauth/authorize|www.battlenet.com.cn/oauth/authorize
+Bitbucket,bitbucket.org/site/oauth2/authorize
+bitly,bitly.com/oauth/authorize
+Box,account.box.com/api/oauth2/authorize
+Dailymotion,www.dailymotion.com/oauth/authorize
+Deutsche Telekom,accounts.login.idm.telekom.com/oauth2/auth
+deviantART,www.deviantart.com/oauth2/authorize
+Discogs,api.discogs.com/oauth/request_token
+Dropbox,www.dropbox.com/oauth2/authorize
+Etsy,openapi.etsy.com/v2/oauth/request_token
+Evernote,sandbox.evernote.com/oauth
+Facebook,www.facebook.com/v3.1/dialog/oauth
+Fitbit,www.fitbit.com/oauth2/authorize
+Flickr,www.flickr.com/services/oauth/request_token
+Formstack,www.formstack.com/api/v2/oauth2/authorize
+Foursquare,foursquare.com/oauth2/authenticate
+GitHub,github.com/login/oauth/authorize
+Goodreads,www.goodreads.com/oauth/request_token
+Google,accounts.google.com/signin/oauth
+Groundspeak,geocaching.com/oauth/authorize.aspx
+Huddle,login.huddle.net/request
+Imgur,api.imgur.com/oauth2/authorize
+Instagram,api.instagram.com/oauth/authorize
+LinkedIn,www.linkedin.com/oauth/v2/authorization
+Microsoft,login\.microsoftonline\.com\/[a-z0-9A-Z\.-]+\/oauth2\/authorize
+Mixi,mixi.jp/connect_authorize.pl
+Passport,www.provider.com/oauth/request_token|www.provider.com/oauth2/authorize
+Plurk,www.plurk.com/OAuth/request_token
+Reddit,www.reddit.com/api/v1/authorize
+Salesforce,login.salesforce.com/_nc_external/system/security/oauth/RequestTokenHandler|login.salesforce.com/services/oauth2/authorize
+Sina Weibo,api.weibo.com/oauth2/authorize
+Stack Exchange,stackoverflow.com/oauth|stackoverflow.com/oauth/dialog
+Strava,www.strava.com/oauth/authorize
+Stripe,connect.stripe.com/oauth/authorize
+Trello,trello.com/1/OAuthGetRequestToken
+Tumblr,www.tumblr.com/oauth/request_token
+Twitch,id.twitch.tv/oauth2/authorize
+Twitter,api.twitter.com/oauth/request_token|api.twitter.com/oauth/authenticate
+Vimeo,api.vimeo.com/oauth/authorize|api.vimeo.com/oauth/authorize/client
+Vk,oauth.vk.com/authorize
+Withings,account.withings.com/oauth2_user/authorize2
+Yahoo!,api.login.yahoo.com/oauth2/request_auth
+Yammer,www.yammer.com/oauth2/authorize
+Yandex,oauth.yandex.com/authorize
+Zendesk,zendesk.com/oauth/authorizations/new
+Tecent QQ,graph.qq.com/oauth2.0/show
+Wechat,open.weixin.qq.com/connect/qrconnect
+mail.ru,connect.mail.ru/oauth/authorize
+jd,openlogin.jd.com/oauth2/login
+baidu,openapi.baidu.com/oauth/2.0/authorize

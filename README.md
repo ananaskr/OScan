@@ -47,6 +47,7 @@ pip install -r requirements.txt
 - [ ] Same Original Redirection with XSS.
 - [ ] Access Token Middle Attack.
 - [ ] Same Original Redirection with remote image.
+- [ ] OAuth API Crawing.
 
 
 
@@ -67,3 +68,23 @@ python oscan.py -u http://api.xxx.com/xxx
 ## Example
 ![](https://github.com/ananaskr/OScan/blob/master/img/3.png)
 
+## OAuth API
+In [https://en.wikipedia.org/wiki/List\_of\_OAuth\_providers](https://en.wikipedia.org/wiki/List_of_OAuth_providers) sumarizes many oauth provider. The corresponding OAuth API prefix can be extracted to identify OAuth APIs in websites.  
+
+data/provider.txt 
+
+
+| OAuth Provider | OAuth API format |
+| :-------------- | :---------------- |
+|  500px         | 	api.500px.com/v1/oauth/request_token |
+| Amazon|www.amazon.com/ap/oa|
+|AOL|api.login.aol.com/oauth2/request_auth|
+|Autodesk|developer.api.autodesk.com/authentication/v1/authorize|
+|Basecamp|launchpad.37signals.com/authorization/new|
+|Battle.net|battle.net/oauth/authorize|www.battlenet.com.cn/oauth/authorize|
+|Bitbucket|bitbucket.org/site/oauth2/authorize|
+|Facebook|www.facebook.com/v3.1/dialog/oauth|
+|GitHub|github.com/login/oauth/authorize|
+|Google|accounts.google.com/signin/oauth|
+|Sina Weibo|	api.weibo.com/oauth2/authorize|
+|...|...|
