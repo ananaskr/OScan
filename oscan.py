@@ -2,12 +2,9 @@ import sys
 import json
 import argparse
 
-
-
-
 from core.check import check
 from db.logger import logger
-from library.ScanTask import Scantask
+from library.ScanTask import scantask
 
 def get_target(path):
 	with open(path,'r') as f:
@@ -39,16 +36,14 @@ def get_arg(args=None):
 
 def main():
 	target1,target2 = get_arg(sys.argv[1:])
-	task = Scantask(target1,target2)
-	task.generate_scanid()
-	print("Starting scanning...........................................")
-	task.start()
-	print("Complete scanning...........................................")
+	#print("Starting scanning......................................................")
+	task = scantask(target1,target2)
+	#print("Complete scanning......................................................")
 
 
 
 if __name__ == '__main__':
 	scan_logger = logger()
 	scan_logger.banner()
-	assert check()
+	check()
 	main()

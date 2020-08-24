@@ -12,13 +12,14 @@ class Database:
 
 	def fetch_records(self,col,param):
 		param = json.loads(param)
-		print(param)
-		print(param)
-		records = self.db.col.find(param)
+		records = self.db[col].find(param)
+		#print(records)
+		#result = {}
 		if records:
-			for data in records:
-				data.pop('_id')
-				print(data)
+			return records
+		else:
+			return False
+
 
 	def insert_record(self,collection,data):
 		try:
@@ -32,10 +33,8 @@ class Database:
 		except Exception as e:
 			raise e
 
-#if __name__ == '__main__':
-#	database = Database()
-	#param = """[{"scanid":12}]"""
-	#database.fetch_records(param)
-#	data = {"url":"http://test.com","description":"state same","payload":"http://test.com?state={}"}
-#	database.insert_record("csrf_result",data)
+if __name__ == '__main__':
+	database = Database()
+
+	database.fetch_records("csrf",'{"scanid":"844265ae69514a01638a5e8c9fc56449"}')
 

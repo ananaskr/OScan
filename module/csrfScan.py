@@ -12,6 +12,7 @@ from library.DiffResponse import diff
 from config.config import get_config
 
 db = Database()
+logger = logger()
 
 
 # CSRFScan detect the CSRF vulnerability in five scenes.
@@ -19,7 +20,6 @@ db = Database()
 class CSRFScan:
 
 	def __init__(self,target1,target2):
-		self.logger = logger()
 		self.target1 = target1
 		self.target2 = target2
 		self.csrf_query = get_config('csrf.property','query','csrf_name')
@@ -28,23 +28,30 @@ class CSRFScan:
 
 	def same_token_detect(self,token1,token2):
 		same = 0
+		token = ''
 		if token1.has_key('query'):
 			if cmp(token1['query'],token2['query']) == 0:
 				same = 1
+				token = token1['query']
 			else:
 				same = 0
 		if token1.has_key('headers'):
 			if cmp(token1['headers'],token2['headers']) == 0:
 				same = 1 & same
+				token = token1['headers']
 			else:
 				same = 0
 		if token1.has_key('body'):
 			if cmp(token1['body'],token2['body']) == 0:
 				same = 1 & same
+				token = token1['body']
 			else:
 				same = 0
 
-		return same
+		if same:
+			return token
+		else:
+			return False
 
 	def no_token_detect(self,target):
 		csrf = {}
@@ -155,7 +162,7 @@ class CSRFScan:
 			for key,value in query.items():
 				for key1,value1 in body.items():
 					if query.get(key) == body.get(key1):
-						double = 1 & double
+						double = 1 
 		if 'headers' in token and 'body' in token:
 		#if token.has_key('headers') and token.has_key('body'):
 			header = token['headers']
@@ -163,7 +170,7 @@ class CSRFScan:
 			for key,value in header.items():
 				for key1,value1 in body.items():
 					if header.get(key) == body.get(key1):
-						double = 1 & double
+						double = 1 
 
 		return double
 
@@ -256,51 +263,51 @@ class CSRFScan:
 
 
 def csrf_scan(task):
-	if 'headers' not in task.target1:
+	if 'headers' not in task['target1']:
 	#if not task.target1.has_key('headers'):
 		print("Please input the complete information to detect csrf.")
 		exit()
-	if not task.target2:
-		print("If want more accurate result, another one request should be provided with -r options")
-	csrf = CSRFScan(task.target1,task.target2)
+	if not task['target2']:
+		print("%s[!]If want more accurate result, another one request should be provided with -r options%s" % (logger.LB,logger.W))
+	csrf = CSRFScan(task['target1'],task['target2'])
 	# No csrf token detected.
-	token = csrf.no_token_detect(task.target1)
+	token = csrf.no_token_detect(task['target1'])
 	#print('qkl')
 	if not token:
-		print("%s[+]Target is vulnerable to csrf attack%s" % (csrf.logger.G,csrf.logger.W))
-		data = {"scanid":task.scanid,"url":csrf.target1['url'],"type":"csrf attack","payload":"no csrf token provide"}
+		print("%s[+]Target is vulnerable to csrf attack%s" % (logger.Y,logger.W))
+		data = {"scanid":task['scanid'],"url":csrf.target1['url'],"type":"csrf attack","payload":"no csrf token provide"}
 		db.insert_record('csrf',data)
 		exit()
 	# Weak csrf token detected.
 	weak = csrf.weak_token_detect(token)
 	if weak:
-		print("%s[+]Target is vulnerable to csrf attack%s" % (csrf.logger.G,csrf.logger.W))
-		data = {"scanid":task.scanid,"url":csrf.target1['url'],"type":"csrf attack","payload":"weak csrf token provide"}
+		print("%s[+]Target is vulnerable to csrf attack%s" % (logger.Y,logger.W))
+		data = {"scanid":task['scanid'],"url":csrf.target1['url'],"type":"csrf attack","payload":"weak csrf token provide"}
 		db.insert_record('csrf',data)
 	# Same csrf token detected, ie use same value in every request.
-	if task.target2:
-		token1 = csrf.no_token_detect(task.target2)
+	if task['target2']:
+		token1 = csrf.no_token_detect(task['target2'])
 		same = csrf.same_token_detect(token,token1)
 		if same:
-			print("%s[+]Target is vulnerable to csrf attack%s" % (csrf.logger.G,csrf.logger.W))
-			data = {"scanid":task.scanid,"url":csrf.target1['url'],"type":"csrf attack","payload":"same csrf token provide"}
+			print("%s[+]Target is vulnerable to csrf attack%s" % (logger.Y,logger.W))
+			data = {"scanid":task['scanid'],"url":csrf.target1['url'],"type":"csrf attack","payload":"same csrf token provide"}
 			db.insert_record('csrf',data)
 	# Double csrf token detected.
 	double = csrf.double_token_detect(token)
 	if double:
-		print("%s[+]Target is vulnerable to csrf attack%s" % (csrf.logger.G,csrf.logger.W))
-		data = {"scanid":task.scanid,"url":csrf.target1['url'],"type":"csrf attack","payload":"double csrf token provide"}
+		print("%s[+]Target is vulnerable to csrf attack%s" % (logger.Y,logger.W))
+		data = {"scanid":task['scanid'],"url":csrf.target1['url'],"type":"csrf attack","payload":"double csrf token provide"}
 		db.insert_record('csrf',data)
 	# Server verify csrf token or not.
 	verify = csrf.no_verify_detect(token)
 	if verify:
-		print("%s[+]Target is vulnerable to csrf attack%s" % (csrf.logger.G,csrf.logger.W))
-		data = {"scanid":task.scanid,"url":csrf.target1['url'],"type":"csrf attack","payload":"miss csrf token verify"}
+		print("%s[+]Target is vulnerable to csrf attack%s" % (logger.Y,logger.W))
+		data = {"scanid":task['scanid'],"url":csrf.target1['url'],"type":"csrf attack","payload":"miss csrf token verify"}
 		db.insert_record('csrf',data)
 	# Remove 
 	remove = csrf.remove_token_detect(token)
 	if remove:
-		print("%s[+]Target is vulnerable to csrf attack%s" % (csrf.logger.G,csrf.logger.W))
-		data = {"scanid":task.scanid,"url":csrf.target1['url'],"type":"csrf attack","payload":"remove csrf token succeed"}
+		print("%s[+]Target is vulnerable to csrf attack%s" % (logger.Y,logger.W))
+		data = {"scanid":task['scanid'],"url":csrf.target1['url'],"type":"csrf attack","payload":"remove csrf token succeed"}
 		db.insert_record('csrf',data)
 	return True

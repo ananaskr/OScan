@@ -77,6 +77,12 @@ class RedirectScan(object):
 		print(domain)
 		return domain
 
+	def check_cookie(self):
+		if 'cookies' in self.target and self.target['cookies'] != '':
+			return True
+		else:
+			return False
+
 	def detect(self,scanid):
 		main = self.fetch_main()
 		res = self.craw_uri(main)
@@ -88,7 +94,7 @@ class RedirectScan(object):
 					result = self.validate_code(res)
 					if result:
 						code = result
-						print("%s[+]Target is vulnerable to SOM redirect attack. " % (self.logger.G,self.logger.W))
+						print("%s[+]Target is vulnerable to SOM redirect attack. " % (self.logger.Y,self.logger.W))
 						data = {"scanid":scanid,"type":self.type,"payload":muri}
 						db.insert_record("Redirection",data)
 						return True
@@ -97,7 +103,7 @@ class RedirectScan(object):
 				else:
 					result = self.validate_resp(res)
 					if result:
-						print("%s[+]Target is vulnerable to SOM redirect attack. " % (self.logger.G,self.logger.W))
+						print("%s[+]Target is vulnerable to SOM redirect attack. " % (self.logger.Y,self.logger.W))
 						data = {"scanid":scanid,"type":self.type,"payload":muri}
 						db.insert_record("Redirection",data)
 						return True
@@ -107,9 +113,9 @@ class RedirectScan(object):
 
 
 def coredirect_scan(task):
-	scan = RedirectScan(task.target1)
+	scan = RedirectScan(task['target1'])
 	scan.fetch_redirect()
-	scan.detect(task.scanid)
+	scan.detect(task['scanid'])
 
 
 

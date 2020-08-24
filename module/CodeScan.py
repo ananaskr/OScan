@@ -1,14 +1,18 @@
-
-from core.diff import diff_status_code,diff_headers,diff_text
-from core.sendrequests import request_send
-from utils.db import Database
 from urllib.parse import urlparse,quote,unquote,parse_qs,parse_qsl
 
 db = Database()
 
-class CodeValid(object):
+# This is used for checking whether authorization code. 
+class CodeScan(object):
+
 	def __init__(self):
 		pass
+
+	# To fetch a valid code, ensure the code has not been used.
+	def fetch_code(self):
+
+
+
 
 	def check_waf_rp(scanid,url,method,headers,auth_code):
 		res = request_send(url,method,headers)
@@ -39,6 +43,10 @@ class CodeValid(object):
 						return True
 					else:
 						return False
+
+def scancode(task):
+
+	scan = CodeScan(task.target1)
 
 
 

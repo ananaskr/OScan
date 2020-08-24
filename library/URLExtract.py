@@ -15,9 +15,7 @@ class URLExtract(object):
 			
 			domain1 = urlparse(_['href']).netloc
 			domain2 = urlparse(self.url).netloc
-			print(domain2)
 			if (domain1 == domain2) and (_['href'] != self.url):
-				print('qkl')
 				url.append(_['href'])
 
 		return url
@@ -27,7 +25,6 @@ def urlextract(url,target):
 	#print(target.content)
 	extractor = URLExtract(url,target.content)
 	urls = extractor.extract_same_url() 
-	print(urls)
 	if len(urls) >= 1:
 		return urls
 	

@@ -45,16 +45,12 @@ class RedirectScan(object):
 
 	# Extract the Main Domain and fetch the same origin url.
 	def extract_urls_from_homepage(self):
-		#print(self.redirect)
 		rep = urlparse(self.redirect)
 		val = tldextract.extract(self.redirect)
 		domain = "{0}://{1}.{2}".format(rep.scheme,val.domain,val.suffix)
-		#print(domain)
 		target = {}
 		target['url'] = domain
-		#print(target)
 		res = request(target)
-		#print(res.content)
 		urls = urlextract(self.redirect, res)
 		return urls
 
@@ -67,7 +63,6 @@ class RedirectScan(object):
 	# Combine the malformed redirect_uri parameter into
 	def merge(self,muri):
 		redirect_uri = quote(muri)
-		#print(redirect_uri)
 		query = parse_qs(self.repart.query)
 		query['redirect_uri'] = redirect_uri.split(' ')
 
@@ -100,15 +95,14 @@ class RedirectScan(object):
 
 
 def soredirect_scan(task):
-	scan = RedirectScan(task.target1)
-	#print(task.target1)
+	scan = RedirectScan(task['target1'])
 	scan.fetch_redirect()
 	uris = scan.extract_urls_from_homepage()
 	for _ in uris:
 		muri = scan.merge(_)
-		result = scan.detect(_,task.scanid)
+		result = scan.detect(_,task['scanid'])
 		if result:
-			print("%s[+]Target is vulnerable to SOM redirect attack. %s" % (scan.logger.G,scan.logger.W))
-			data = {"scanid":task.scanid,"type":scan.type,"payload":muri}
+			print("%s[+]Target is vulnerable to SOM redirect attack. %s" % (scan.logger.Y,scan.logger.W))
+			data = {"scanid":task['scanid'],"type":scan.type,"payload":muri}
 			db.insert_record("Redirection",data)
 			return True

@@ -57,12 +57,12 @@ class ScopeScan:
 
 
 def scope_scan(task):
-	ss = ScopeScan(task.target1)
+	ss = ScopeScan(task['target1'])
 	ss.fetch_redirect()
 	muri,result = ss.run()
 	if not result:
-		print("%s[+]Target is vulnerable to scope escalation attack. %s" % (ss.logger.G,ss.logger.W))
-		data = {"scanid":task.scanid,"type":ss.type,"payload":muri}
+		print("%s[+]Target is vulnerable to scope escalation attack. %s" % (ss.logger.Y,ss.logger.W))
+		data = {"scanid":task['scanid'],"type":ss.type,"payload":muri}
 		db.insert_record("Scope",data)
 	return True
 

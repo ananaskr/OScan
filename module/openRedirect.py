@@ -6,8 +6,6 @@ from db.db import Database
 from library.DiffResponse import diff
 from db.logger import logger
 
-db = Database()
-
 class RedirectScan(object):
 
 	def __init__(self,target):
@@ -16,6 +14,7 @@ class RedirectScan(object):
 		self.redirect = ''
 		self.type = 'Open Redirection'
 		self.logger = logger()
+		self.db = Database()
 
 	# Extract the redirect_uri value from the target url
 	def fetch_redirect(self):
@@ -71,18 +70,18 @@ class RedirectScan(object):
 			result = self.validate_code(res)
 			if result:
 				code = result
-				print("%s[+]Target is vulnerable to open redirect attack. %s" % (self.logger.G,self.logger.W))
+				print("%s[+]Target is vulnerable to open redirect attack. %s" % (self.logger.Y,self.logger.W))
 				data = {"scanid":scanid,"type":self.type,"payload":muri}
-				db.insert_record("Redirection",data)
+				self.db.insert_record("Redirection",data)
 				return True
 			else:
 				return False
 		else:
 			result = self.validate_resp(res)
 			if result:
-				print("%s[+]Target is vulnerable to open redirect attack. %s" % (self.logger.G,self.logger.W))
+				print("%s[+]Target is vulnerable to open redirect attack. %s" % (self.logger.Y,self.logger.W))
 				data = {"scanid":scanid,"type":self.type,"payload":muri}
-				db.insert_record("Redirection",data)
+				self.db.insert_record("Redirection",data)
 				return True
 			else:
 				return False
@@ -91,12 +90,12 @@ class RedirectScan(object):
 
 # Main function of redirect scan
 def opredirect_scan(task):
-	scan = RedirectScan(task.target1)
+	scan = RedirectScan(task['target1'])
 	scan.fetch_redirect()
 	muris = url_mutate(scan.redirect)
 	for _ in muris:
 		muri = scan.merge(_)
-		valid = scan.detect(muri,task.scanid)
+		valid = scan.detect(muri,task['scanid'])
 	#print(task.target1)
 	return True
 		
