@@ -66,7 +66,7 @@ python oscan.py -u http://api.xxx.com/xxx
 ```
 
 ## Example
-![](https://github.com/ananaskr/OScan/blob/master/img/3.png)
+![](https://github.com/ananaskr/OScan/blob/master/img/4.png)
 
 ## OAuth API
 In [https://en.wikipedia.org/wiki/List\_of\_OAuth\_providers](https://en.wikipedia.org/wiki/List_of_OAuth_providers) sumarizes many oauth provider. The corresponding OAuth API prefix can be extracted to identify OAuth APIs in websites.  
